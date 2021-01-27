@@ -4,12 +4,12 @@ defmodule ZotpUserApi.Endpoint do
   plug(:match)
 
   plug(Plug.Parsers,
-    parsers: [:json],
-    pass: ["application/json"],
+    parsers: [:json, :urlencoded],
+    pass: ["application/json","text/*"],
     json_decoder: Poison
   )
 
-forward("/api/v1", to: ZotpUserApi.Router) # Todas las peticiones a /api/v1 se enviaran a nuestro router
+  forward("/api/v1", to: ZotpUserApi.Router) # Todas las peticiones a /api/v1 se enviaran a nuestro router
 
   plug(:dispatch)
 
